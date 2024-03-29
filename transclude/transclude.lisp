@@ -1,0 +1,5 @@
+(defmacro transclude (path)
+  `(progn ,@(with-open-file (in path)
+              (let ((done (gensym)))
+                (do ((forms nil (cons (read in nil done) forms)))
+                    ((and forms (equal (car forms) done)) (nreverse (cdr forms))))))))

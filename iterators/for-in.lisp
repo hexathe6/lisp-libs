@@ -1,0 +1,6 @@
+(defmacro for-in (anaphor list &body body)
+  (let ((i (gensym)))
+    `(do ((,i 0 (+ ,i 1)) (,anaphor nil))
+         ((= ,i (length ,list)) nil)
+       (setq ,anaphor (nth ,i ,list))
+       ,@body)))
